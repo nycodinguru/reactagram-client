@@ -1,0 +1,59 @@
+.Menu-modal-container {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.65);
+    position: fixed;
+    top: 0;
+    z-index: 100000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all ease-in-out 0.2s;
+
+    &.Open {
+        transition: all ease-out 0.2s;
+        opacity: 1;
+
+        .Menu-modal {
+            transform: scale(1);
+            transition: all ease-out 0.1s;
+            transition-delay: 0.1s;
+        }
+    }
+
+    .Menu-modal {
+        cursor: pointer;
+        transition: all ease-in 0.2s;
+        transform: scale(1.3);
+        height: max-content;
+        width: 400px;
+        background: #fff;
+        border-radius: 15px;
+        text-align: center;
+
+        @include mobile {
+            width: 260px;
+        }
+
+        .Menu-modal-list {
+            font-size: 0.9rem;
+            font-weight: 500;
+
+            .Menu-modal-list-item {
+                border-bottom: solid #00000021;
+                border-width: 1px;
+                height: 48px;
+                padding: 8px 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                
+                &:first-of-type {
+                    color: red;
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+}

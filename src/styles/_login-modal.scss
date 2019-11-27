@@ -1,0 +1,171 @@
+.Login-modal-container {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.65);
+    position: fixed;
+    top: 0;
+    z-index: 100000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all ease-in-out 0.2s;
+
+    @include mobile {
+        align-items: flex-end;
+        opacity: 1;
+    }
+
+    &.Open {
+        transition: all ease-out 0.2s;
+        opacity: 1;
+
+        .Login-modal {
+            transform: scale(1);
+            transition: all ease-out 0.1s;
+            transition-delay: 0.1s;
+
+        @include mobile {
+            transform: translateY(0);
+            transition: all 0.3s ease-in-out;
+        }
+        }
+    }
+
+    .Login-modal {
+        transition: all ease-in 0.2s;
+        transform: scale(1.3);
+        height: 332px;
+        width: 400px;
+        background: #fff;
+        border-radius: 15px;
+        padding: 0 36px;
+        text-align: center;
+
+    @include mobile {
+        height: 53vh;
+        width: 100vw;
+        margin: 0;
+        border-radius: 15px 15px 0 0;
+        transform: translateY(100vh);
+    }
+
+    @include tablet {
+        height: 327px !important;
+        width: 260px !important;
+    }
+
+        .Close-toggle {
+            display: none;
+
+            @include mobile {
+                display: block !important;
+                width: 52px;
+                height: 0px;
+                margin: 12px auto;
+                border: solid rgba(0, 0, 0, 0.12);
+                border-radius: 11px;
+                border-width: 2px;
+            }
+        }
+
+        .Follow-icon-parent {
+            width: 100%;
+            height: 100px;
+            margin: 28px auto 24px auto;
+
+            &.Connect {
+                height: 93px;
+                margin: 38px auto 0 auto;
+
+                @include mobile {
+                    margin-top: 23px;
+                }
+            }
+
+        @include mobile {
+            margin-top: 44px;
+        }
+
+            .Follow-icon, .Connect-icon {
+                image-rendering: -webkit-optimize-contrast;
+                background-image: url('../assets/images/pngs/followmodal.png');
+                background-position: center;
+                background-size: cover;
+                height: 100%;
+                width: 100px;
+                margin: 0 auto;
+            }
+
+            .Connect-icon {
+                opacity: 0.75;
+                image-rendering: auto;
+                background-image: url('../assets/images/pngs/reactagramlogo.png');
+                background-size: 60%;
+                background-repeat: no-repeat;
+            }
+
+            .Follow-profile-picture {
+                background-position: center;
+                background-size: cover;
+                position: relative;
+                height: 33px;
+                width: 33px;
+                border-radius: 50%;
+                border: solid #fff;
+                border-width: 3px;
+                top: -35px;
+                left: 179px;
+
+                @include mobile {
+                    left: 170px;
+                }
+            }
+        }
+
+        p {
+            font-size: 0.9rem;
+        }
+
+        .Login-modal-buttons-parent {
+            width: 100%;
+
+            .Login-button {
+                width: 100%;
+                opacity: 1;
+                padding: 23px 0;
+                margin: 23px 0 0 0;
+            }
+
+            .Signup-button {
+                width: 100%;
+                opacity: 1;
+                padding: 23px 0;
+                line-height: 0px;
+                cursor: pointer;
+                color: #3897f0;
+                font-size: 0.9rem;
+                font-weight: 600;
+                margin-bottom: 15px;
+
+            @include mobile {
+                color: #000;
+                margin-top: 8px;
+                border: solid rgba(0, 0, 0, 0.07);
+                border-width: 2px;
+                border-radius: 4px;
+            }
+            }
+
+            .Not-now-button {
+                font-size: 0.9rem;
+                font-weight: 600;
+                cursor: pointer;
+
+            @include mobile {
+               display: none;
+            }
+            }
+        }
+    }
+}

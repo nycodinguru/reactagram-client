@@ -1,26 +1,63 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import './styles/index.scss';
+import { Route, Switch, withRouter } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Profile from './components/Profile/Profile';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import Layout from './hoc/Layout';
+import NoMatch from './components/NoMatch';
+import ViewPostDirect from './components/Profile/ViewPostDirect/ViewPostDirect';
+import Profiles from './components/Directory/Profiles';
+
+
+class App extends Component {
+    render() {
+        let routes = (
+            <Route
+                render={({ location }) => (
+                    <React.Fragment>
+                    <Switch location={location}>
+                        <Route 
+                            path="/" exact 
+                            render={props => <Signup {...props}/>}
+                        />
+                        <Route 
+                            path="/accounts/login" exact 
+                            render={props => <Login {...props}/>}
+                        />
+                        <Route 
+                            path="/accounts/signup" exact 
+                            render={props => <Signup {...props}/>}
+                        />
+                        <Route 
+                            path="/directory/profiles" exact 
+                            render={props => <Profiles {...props}/>}
+                        />
+                        <Route 
+                            path="/:user" exact 
+                            render={props => <Profile {...props}/>}
+                        />
+                        <Route 
+                            path="/:user/:postId" exact 
+                            render={props => <ViewPostDirect {...props}/>}
+                        />
+                        <Route 
+                            path="*"
+                            render={props => <NoMatch {...props}/>}
+                        />         
+                    </Switch>  
+                    </React.Fragment>
+                )}
+            />
+        )
+       
+        return (
+            <div className="App">
+                <Layout>{routes}</Layout>
+            </div>
+        )
+    }
 }
 
-export default App;
+export default withRouter(App);

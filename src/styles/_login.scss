@@ -1,0 +1,129 @@
+.Form-container {
+    width: 100vw;
+    height: 100vh;
+    max-height: calc(100vh - 85px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include mobile {
+       background-color: #fff;
+    }
+
+    .Form-panel-outer {
+        height: 100vh;
+        width: 350px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        @include mobile {
+            height: 100%;
+            width: 100%;
+            justify-content: flex-start;
+        }
+
+        .Form-panel-upper {
+            .Form-title {
+                display: none;
+            }
+
+            svg {
+                width: 100%;
+                height: 100px;
+                margin: 0 auto 20px;
+                transform: scale(0.77);
+            }
+
+            .Form-blurb {
+                text-align: center;
+                margin: -25px auto 20px auto;
+                opacity: 0.4;
+                
+                &.Login {
+                   font-size: 0.9rem;
+                   font-weight: 500;
+                }
+
+                &.Signup {
+                    font-size: 1.1rem;
+                    font-weight: 700;
+                }
+            }
+
+            .Form-button {
+                pointer-events: none;
+                opacity: 0.35;
+                background-color: #3897f0;
+                color: #fff;
+                width: 100%;
+                height: 30px;
+                font-size: 0.9rem;
+                display: inline-block;
+                padding: 5px 9px;
+                font-weight: 700;
+                margin: 15px 0;
+                border: none;
+            }
+
+            .Sign-up {
+                pointer-events: all;
+                opacity: 1;
+            }
+
+            hr {
+                opacity: 0.2;
+                margin: 10px 0 20px 0;
+            }
+
+            .Or {
+                position: absolute;
+                margin: -30px 0 0 110px;
+                background-color: white;
+                padding: 0 15px;
+                color: rgba(0, 0, 0, 0.5);
+                font-weight: 700;
+                font-size: 0.825rem;
+
+                @include mobile {
+                    margin-left: 123px;
+                }
+            }
+
+            .Lower-blurb {
+                font-size: 0.9rem;
+                text-align: center;
+                color: rgba(0, 0, 0, 0.5);
+                width: 80%;
+                margin: 0 auto 15px auto;
+            }
+
+            .Forgot-password {
+                text-align: center;
+                width: 100%;
+                position: relative;
+                margin: 20px auto 0 auto;
+                font-weight: normal;
+                font-size: 0.8rem;
+            }
+        }
+
+        .Form-panel-lower {
+            padding: 25px 40px;
+            font-size: 0.9rem;
+            text-align: center;
+            margin: 9px 0 0 0;
+
+            p {
+                display: inline-block;
+            }
+
+            a {
+                display: inline-block;
+                color: $reactagramblue;
+                font-weight: 700;
+                margin: 0 0 0 3px;
+            }
+        }
+    }
+}

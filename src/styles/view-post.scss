@@ -1,0 +1,212 @@
+.View-post-container {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.Direct-view {
+        padding: 130px 0 0 0;
+        position: inherit;
+        background-color: $offWhite;
+        height: calc(100vh - 97px);
+    }
+
+    .Close-button {
+        z-index: 10500;
+        background: 0 0;
+        border: 0;
+        cursor: pointer;
+        height: 36px;
+        outline: 0;
+        overflow: hidden;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 36px;
+        color: $offWhite;
+        display: block;
+        font-size: 2.3rem;
+        line-height: 2.1rem;
+        font-weight: 600;
+        padding: 0;
+        margin: 0;
+
+        @include mobile {
+            display: none;
+        }
+    }
+
+    .View-post-modal {
+        max-width: 932px;
+        max-height: 597px;
+        min-height: 450px;
+        background: #fff;
+        width: 932px;
+        display: flex;
+        flex-direction: row;
+
+        @include bigtablet {
+            width: 92vw !important;
+            height: 59vw !important;
+        }
+
+        .View-post-left-section {
+            background-size: cover;
+            background-position: center;
+            min-width: 55%;
+            height: 100%;
+            background-repeat: no-repeat;
+        }
+
+        .View-post-right-section {
+            min-width: 300px;
+            width: max-content;
+            min-height: 85%;
+            max-height: 95%;
+
+            .View-post-user-info, .Comment-section {
+                width: 100%;
+                padding: 17px;
+                border-bottom: solid rgba(0, 0, 0, 0.08);
+                border-width: 1px;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+            
+                .View-post-user-profile-image {
+                    height: 40px;
+                    width: 40px;
+                    background-size: cover;
+                    background-position: center;
+                    border-radius: 50%;
+                    display: inline-block;
+                }
+
+                .View-post-username-parent {
+                    display: inline-block;
+                    margin-left: 20px;
+                    font-weight: 600;
+                    font-size: 0.9rem;
+
+                    .View-post-username {
+
+                        .Verified {
+                            background-image: url('../assets/images/pngs/verified-checkmark.png');
+                            background-size: cover;
+                            background-position: center;
+                            height: 16px;
+                            width: 16px;
+                            display: inline-block;
+                            transform: translateY(3px);
+                            image-rendering: -webkit-optimize-contrast;
+                        }
+                        
+                        span {
+                            cursor: pointer;
+                            color: $reactagramblue;
+                        }
+                    }
+                    
+                }
+
+                .View-post-menu {
+                    cursor: pointer;
+                    position: absolute;
+                    margin: -7px 0 0 250px;
+                    font-size: 1.6rem;
+                    letter-spacing: -1px;
+                }
+            }
+
+            .Comment-section {
+                height: 65%;
+                display: flex;
+                flex-direction: column;
+
+                .Comment-section-caption {
+                    display: flex;
+
+                    .View-post-caption {
+                        display: inline-block;
+                        font-weight: normal;
+                        width: 220px;
+
+                    span {
+                        font-weight: 600;
+
+                        .Verified {
+                            background-image: url('../assets/images/pngs/verified-checkmark.png');
+                            background-size: cover;
+                            background-position: center;
+                            height: 16px;
+                            width: 16px;
+                            display: inline-block;
+                            transform: translateY(3px);
+                            image-rendering: -webkit-optimize-contrast;
+                        }
+                    }
+                    }
+                }
+            }
+
+            .Stats-section {
+                .Actions-parent {
+                    width: 100%;
+                    height: 45px;
+                    padding: 4px 12px 0;
+                    image-rendering: -webkit-optimize-contrast;
+
+                    .Action {
+                        display: inline-block;
+                        height: 40px;
+                        width: 40px;
+                        background-size: 58%;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        margin-right: 3px;
+                        cursor: pointer;
+                    }
+
+                    .Like {
+                        background-image: url('../assets/images/pngs/no-like.png');
+                    }
+
+                    .Comment {
+                        background-image: url('../assets/images/pngs/hollow-comment-bubble.png');
+                    }
+
+                    .Share {
+                        background-image: url('../assets/images/pngs/share.png');
+                    }
+                }
+
+                .Likes-stat {
+                    padding: 5px 17px;
+                    font-weight: 600;
+                    font-size: 0.9rem;
+                }
+
+                .Post-date {
+
+                }
+            }
+
+            .Comment-input-field-parent {
+                padding: 15px;
+                font-size: 0.9rem;
+
+                .Comment-input-field-Login-message {
+                    color: $link-blue;
+                }
+            }
+            
+        }
+    }
+}

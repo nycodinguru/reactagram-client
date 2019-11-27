@@ -1,0 +1,56 @@
+.Directory-container {
+    width: 100vw;
+    height: max-content;
+    min-height: calc(100vh - 200px);
+    margin: 105px auto 0 auto;
+    max-width: 935px;
+    
+    .Directory-title {
+        color: $fadedBlack;
+        font-size: 0.9rem;
+        -webkit-font-smoothing: antialiased;
+
+        @include mobile {
+            margin-left: 20px;
+            font-size: 1.1rem;
+        }
+    }
+
+    .Directory-links-parent {
+        background-color: #fff;
+        width: 100%;
+        min-height: 100%;
+        margin: 15px auto;
+        box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+        border-radius: 2px;
+        font-weight: 400;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        @include mobile {
+            flex-direction: column;
+            padding: 25px 0;
+        }
+
+        .Directory-col {
+            height: 560px;
+            padding: 40px 30px;
+            display: flex;
+            justify-content: flex-start;
+            flex-direction: column;
+
+            @include mobile {
+                padding: 0;
+                height: max-content;
+                width: 300px;
+                text-align: left;
+            }
+
+            .username {
+                margin: 10px 0;
+            }
+        }
+    }
+}

@@ -1,0 +1,52 @@
+*   {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.App {
+    @include mobile {
+        overflow-x: hidden;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+div {
+    -webkit-tap-highlight-color: transparent;
+}
+
+li {
+    list-style: none;
+}
+
+body {
+    background-color: $offWhite;
+}
+
+button:focus { 
+    outline: none; 
+}
+
+.Button {
+    font-size: 0.9rem;
+    display: inline-block;
+    padding: 5px 9px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.Loading-div {
+    background-image: url('../assets/images/svgs/react-logo-bw.svg');
+    background-size: 50px;
+    background-position: center;
+    animation: spin-clockwise 5s linear 0s infinite both;
+    height: calc(100vh - 76px);
+    width: 100vw;
+    background-repeat: no-repeat;
+    opacity: 0.65;
+}

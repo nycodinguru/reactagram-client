@@ -1,0 +1,148 @@
+.View-post-container-mobile {
+    height: 100vh;
+    margin: 44px 0 0 0;
+
+    .View-post-user-info {
+        height: 63px;
+        padding: 16px;
+        padding-right: 40px;
+        display: flex;
+        align-items: center;
+
+        .View-post-user-profile-image {
+            height: 32px;
+            width: 32px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .View-post-username-parent {
+            .View-post-username {
+                a {
+                    font-weight: 600;
+                    padding-left: 5px;
+                }
+                .Verified {
+                    background-image: url('../assets/images/pngs/verified-checkmark.png');
+                    background-size: cover;
+                    background-position: center;
+                    height: 16px;
+                    width: 16px;
+                    display: inline-block;
+                    transform: translateY(3px);
+                    image-rendering: -webkit-optimize-contrast;
+                }
+            }
+        }
+
+        .View-post-menu {
+            cursor: pointer;
+            position: absolute;
+            float: right;
+            right: 18px;
+            font-size: 1.7rem;
+            letter-spacing: -1px;
+            margin-top: -6px;
+        }
+    }
+
+    .View-post-image {
+        width: 100%;
+        max-height: 465px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .Stats-section {
+        .Actions-parent {
+            width: 100%;
+            height: 45px;
+            padding: 4px 12px 0 6px;
+
+            .Action {
+                display: inline-block;
+                height: 39px;
+                width: 39px;
+                background-size: 58%;
+                background-repeat: no-repeat;
+                background-position: center;
+                margin-right: 3px;
+                cursor: pointer;
+            }
+
+            .Like {
+                background-image: url('../assets/images/pngs/no-like.png');
+            }
+
+            .Comment {
+                background-image: url('../assets/images/pngs/hollow-comment-bubble.png');
+            }
+
+            .Share {
+                background-image: url('../assets/images/pngs/share.png');
+            }
+        }
+
+        .Likes-stat {
+            padding: 0 17px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .Post-date {
+
+        }
+    }
+
+
+    .Comment-section {
+        padding:  5px 15px 15px;
+        font-size: 0.9rem;
+        display: flex;
+        flex-direction: column;
+
+        .Comment-section-caption {
+            display: flex;
+
+            .View-post-username-parent {
+                width: 100%;
+                font-weight: 400;
+
+                .View-post-caption-username {
+                    font-weight: 600;
+                }
+            }
+
+            .View-post-caption {
+                width: 100%;
+
+            span {
+                .Verified {
+                    background-image: url('../assets/images/pngs/verified-checkmark.png');
+                    background-size: cover;
+                    background-position: center;
+                    height: 16px;
+                    width: 16px;
+                    display: inline-block;
+                    transform: translateY(3px);
+                    image-rendering: -webkit-optimize-contrast;
+                }
+            }
+            }
+
+        }
+    }
+
+    .Comment-input-field-parent {
+        padding: 15px;
+        font-size: 0.9rem;
+
+        .Comment-input-field-Login-message {
+            color: $link-blue;
+        }
+
+
+    }
+}

@@ -1,0 +1,121 @@
+.Profile-posts-container {
+    .Profile-posts-sort-menu {
+        display: flex;
+        justify-content: center;
+        border-top: 1px solid #efefef;
+
+        @include mobile {
+            border-top: none;
+        }
+
+        .option {
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            padding: 20px 0;
+            margin: 0 54px;
+            cursor: pointer;
+            opacity: 0.4;
+            font-weight: 700;
+
+            @include mobile {
+                opacity: 0.6;
+            }
+        }
+        .posts {
+            &::after {
+                content: 'POSTS';
+                
+                @include mobile {
+                    content: '';
+                }
+            }
+
+            @include mobile {
+                filter: saturate(0);
+
+                &.Active {
+                    filter: saturate(1);
+                }
+            }
+            
+            &::before {
+                image-rendering: -webkit-optimize-contrast;
+                content: '_';
+                color:transparent;
+                background-image: url('../assets/images/svgs/bz1jo-xk4q3.svg');
+                padding: 0 20px 0 0;
+                background-size: 41%;
+                background-repeat: no-repeat;
+                background-position: center;    
+                margin-left: -6px;
+
+                @include mobile {
+                    padding: 9px;
+                    background-size: 90%;
+                    background-image: url('../assets/images/svgs/bnns0-ve4nf.svg');
+                }
+            }
+        }
+        .feed {
+            display: none;
+
+            @include mobile {
+                display: inline-block;
+                filter: saturate(0);
+
+                &.Active {
+                    filter: saturate(1)
+                }
+
+                &::before {
+                    image-rendering: -webkit-optimize-contrast;
+                    content: '_';
+                    color:transparent;
+                    background-image: url('../assets/images/svgs/bfmkw-gkg0y.svg');
+                    padding: 9px;
+                    background-size: 90%;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    margin-left: -6px;
+                }
+            }
+        }
+        .tagged {
+            &::before {
+                content: '_';
+                color:transparent;
+                background-image: url('../assets/images/svgs/bnob1-76iqo.svg');
+                padding: 0 20px 0 0;
+                background-size: 46%;
+                background-repeat: no-repeat;
+                background-position: center;
+                margin-left: -6px;
+
+                @include mobile {
+                    opacity: 0.65;
+                    padding: 9px;
+                    background-size: 100%;
+                }
+            }
+
+            &::after {
+                content: 'TAGGED';
+                
+                @include mobile {
+                    content: '';
+                }
+            }
+            
+        }
+
+        .Active {
+            opacity: 1;
+            color: #272727;
+            border-top: 1px solid black;
+
+            @include mobile {
+                border-top: none;
+            }
+        }
+    }
+}
