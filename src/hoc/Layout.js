@@ -14,11 +14,11 @@ class Layout extends Component {
 	render() {
 	return (
 		<React.Fragment>
-		{ this.props.location.pathname !== '/' && 
-			this.props.location.pathname.slice(1,10) !== 'accounts/' &&
-				<Navbar props={this.props}/> }
-		{this.props.children}
-		<Footer props={this.props}/>
+			{ this.props.location.pathname !== '/' && 
+				this.props.location.pathname.slice(1,10) !== 'accounts/' &&
+					<Navbar props={this.props}/> }
+			{this.props.children}
+			<Footer props={this.props}/>
 		</React.Fragment>
 	);
 	}

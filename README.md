@@ -1,68 +1,58 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# REACTAGRAM
+  
 
-## Available Scripts
+### A. What is the Reactagram?
+  
 
-In the project directory, you can run:
+Reactagram is an Instagram inspired photo and life-branding social media app.
 
-### `yarn start`
+The app provides users the opportunity to connect with others.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Through artistic/stylized photo sharing they can indulge in glamor and present their daily lives as they wish it was.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+  
 
-### `yarn test`
+### User stories
+- Users can search for profiles using the search field in the navigation bar (when not on a mobile device)
+- Users can find a direct link to every user profile on the platform in the profile directory link found in the footer
+- Users can view feed(post) & comment
+- Users can delete their own posts
+- Users can create posts, which consist of a image and a caption
+- Users can comment on posts (their own or others)
+- Users can toggle between liking or retracting likes from other users posts
+- When users view the app on their mobile device they are able to scroll through posts either in a single or triple column layout.
+- When users view the app on their browser they are able to scroll through a card layout of posts who's presentation is responsive to window size.
+  
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Users can interact with an individual posts via likes and comments.
+  
 
-### `yarn build`
+##### Users can make a post that is then added to the global feed
+  
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+##### This requires a working:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- Route, model, and controller
+- POST request
+- Triggering a re-render of the feed upon success
+- Styling
+- A user object stored in a global state that can be accessed throughout the application
+  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+##### Users can click on any of their created posts in the global feed and click a delete button to delete it
 
-### `yarn eject`
+  
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### List of the technologies used:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- JavaScript
+- React.js
+- React Router
+- PSQL
+- Fetch
+- Express
+- Flexbox
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+  
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Website address for [Reactagram](https://reactagram-f5a09.web.app/)

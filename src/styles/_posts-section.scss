@@ -78,6 +78,10 @@
                 font-size: 1.2rem;
                 font-weight: 700;
 
+                @include mobile {
+                    display: none;
+                }
+
                 .likes::before {
                     content: "_";
                     color: transparent;

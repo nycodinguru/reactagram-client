@@ -2,9 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Footer(props) {
+    const pathName = props.props.location.pathname;
     return (
         <div className='Footer-container'>
-            <ul className={props.props.location.pathname.slice(1, 10) === 'accounts/' ? 'Valid' : ''}>
+            <ul className={pathName.slice(1, 10) === 'accounts/' || pathName === '/' ? 'Invalid' : ''}>
                 <a href='https://rashad.dev' target="_blank" rel="noopener noreferrer">
                     <li>ABOUT US</li>
                 </a>

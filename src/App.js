@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './styles/index.scss';
 import { Route, Switch, withRouter } from 'react-router-dom';
+import { isMobileOnly } from "react-device-detect";
 
 import Profile from './components/Profile/Profile';
 import Login from './components/Login';
@@ -9,6 +10,7 @@ import Layout from './hoc/Layout';
 import NoMatch from './components/NoMatch';
 import ViewPostDirect from './components/Profile/ViewPostDirect/ViewPostDirect';
 import Profiles from './components/Directory/Profiles';
+import LoginMobile from './components/LoginMobile';
 
 
 class App extends Component {
@@ -20,7 +22,7 @@ class App extends Component {
                     <Switch location={location}>
                         <Route 
                             path="/" exact 
-                            render={props => <Signup {...props}/>}
+                            render={props => isMobileOnly ? <LoginMobile {...props}/> : <Signup {...props}/>}
                         />
                         <Route 
                             path="/accounts/login" exact 

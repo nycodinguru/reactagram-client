@@ -10,6 +10,102 @@
        background-color: #fff;
     }
 
+    &.Login-Mobile {
+        height: calc(100vh - 65px);
+        padding-top: 80px;
+        text-align: center;
+
+        .Menu-button {
+            position: absolute;
+            top: 5px;
+            left: 15px;
+            font-size: 1.2rem;
+            letter-spacing: 0px;
+            font-weight: 500;
+        }
+
+        .blurb {
+            font-size: 0.9rem;
+            font-weight: 500;
+            opacity: 0.5;
+        }
+
+        .Form-button {
+            pointer-events: all !important;
+           opacity: 1 !important;
+           margin: 20px 0 !important;
+        }
+
+        .Sign-up {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: $reactagramblue;
+        }
+
+        .Options-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 10000;
+            background: $offWhite;
+            text-align: left;
+
+            .Options-menu-header {
+                position: absolute;
+                width: max-content;
+                margin: 0 auto;
+                text-align: center;
+                left: 0; 
+                right: 0; 
+                margin-left: auto; 
+                margin-right: auto; 
+                top: 0;
+                padding: 15px 0;
+                font-weight: 600;
+                font-size: 1.02rem;
+            }
+            
+            .Options-menu-close-button {
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 10px 0 0 15px;
+                text-align: center;
+            }
+
+            .Options-menu-list {
+
+                .Options-menu-list-item {
+                    font-size: 1rem;
+                    padding: 16px;
+                    border-bottom: solid #0000001c;
+                    border-width: 1px;
+                    background-color: #fff;
+                    background: url(../assets/images/pngs/chevron.png);
+                    background-position: 97% 50%;
+                    background-size: 27px;
+                    background-repeat: no-repeat;
+
+                    &.header {
+                        background: $offWhite;
+                        color: $fadedBlack;
+                        font-weight: 700;
+                        font-size: 0.9rem;
+                    }
+
+                    &.Invalid {
+                        color: rgba(128, 128, 128, 0.315);
+                    }
+
+                }
+            }
+        }
+    }
+
     .Form-panel-outer {
         height: 100vh;
         width: 350px;

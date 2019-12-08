@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { isMobileOnly } from "react-device-detect";
 
-import ViewPostModal from './ViewPostModal';
+import PostModal from './PostModal';
 import Loading from '../Shared/Loading';
+import MenuModal from '../Shared/MenuModal';
 
 export default function ProfilePosts(props) {
     const [revealStats, setRevealStats] = useState({ postId: '' });
@@ -17,9 +18,9 @@ export default function ProfilePosts(props) {
         height: null,
         width: null
     })
-    const [loadingState, setLoadingState] = useState({
-        isLoading: false
-    });
+    const [loadingState, setLoadingState] = useState({ isLoading: false });
+    const [modalClass, setModalClass] = useState({ open: false });
+    const [menuModal, setMenuModal] = useState({ open: false });
 
     const getImageDimentions = (i) => {
         let img = new Image();
@@ -80,6 +81,14 @@ export default function ProfilePosts(props) {
         };
     }, [props.userPosts, props.props.match.params.user])
 
+    const toggleMenuModal = () => {
+        let boolVal = menuModal.open ? false : true;
+            setMenuModal({open: boolVal})
+            setTimeout(() => {
+                setModalClass({open: boolVal})
+            }, 300)
+    }
+
     const noPosts = () => {
         return (
             <React.Fragment>
@@ -100,17 +109,21 @@ export default function ProfilePosts(props) {
         getImageDimentions(i.image_link)
         setActivePost({
             hasPost: true,
-            postId: i.id,
-            imageLink: i.image_link,
-            totalLikes: i.total_likes,
-            totalComments: i.total_comments,
+            id: i.id,
+            image_link: i.image_link,
+            total_likes: i.total_likes,
+            total_comments: i.total_comments,
             caption: i.caption
         })
+        controlScroll()
         if (isMobileOnly) routeTo(`${data.username}/${i.id}`)
         else {
             changeRoute(i.id)
-            document.body.style.overflow = "hidden";
         }
+    }
+
+    const controlScroll = () => {
+        activePost.hasPost ? document.body.style.overflow = "scroll" : document.body.style.overflow = "hidden"
     }
 
     return (
@@ -121,12 +134,16 @@ export default function ProfilePosts(props) {
                         noPosts()
             }
             {
-                activePost.hasPost && <ViewPostModal
+                activePost.hasPost && <PostModal
                                         props={props}
-                                        imageDimentions={imageDimentions}
+                                        img={imageDimentions}
                                         setActivePost={setActivePost}
                                         post={activePost}
                                         userProfile={props.userProfile}
+                                        setModalClass={setModalClass}
+                                        modalClass={modalClass}
+                                        toggleMenuModal={toggleMenuModal}
+                                        controlScroll={controlScroll}
                                     />
             }
             <div className="Row" style={{height: 0}}> 
@@ -134,6 +151,15 @@ export default function ProfilePosts(props) {
             <div className='Post-thumbnail' style={{height: 0}}></div>
             <div className='Post-thumbnail' style={{height: 0}}></div>
             </div>
+            {
+                menuModal.open &&
+                    <MenuModal
+                        props={props}
+                        menuModal={menuModal}
+                        modalClass={modalClass}
+                        toggleMenuModal={toggleMenuModal}
+                    />
+            }     
         </div>
 
     )

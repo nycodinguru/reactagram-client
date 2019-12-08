@@ -24,7 +24,7 @@ export default function Navbar(props) {
 
     function removeFocus() {
         document.activeElement.blur()
-        setTimeout(() => setSearch({ ...search, searchActive: false }), 100)
+        setTimeout(() => setSearch({ ...search, searchActive: false }), 150)
     }
 
     async function userSearch(e) {

@@ -3,7 +3,7 @@
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.65);
     position: fixed;
-    top: 0;
+    bottom: 0;
     z-index: 100000;
     display: flex;
     justify-content: center;
@@ -26,8 +26,13 @@
             transition-delay: 0.1s;
 
         @include mobile {
+            height: 410px;
             transform: translateY(0);
             transition: all 0.3s ease-in-out;
+
+            &.Connect {
+                height: 340px;
+            }
         }
         }
     }
@@ -43,7 +48,6 @@
         text-align: center;
 
     @include mobile {
-        height: 53vh;
         width: 100vw;
         margin: 0;
         border-radius: 15px 15px 0 0;

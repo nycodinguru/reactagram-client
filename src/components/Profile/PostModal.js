@@ -2,34 +2,46 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function ViewPostModal(props) {
-    const userData = props.userProfile.user.user;
-    const postData = props.post;
+    const userData = props.userProfile ? props.userProfile.user.user : props.userPost.user;
+    const postData = props.post ? props.post : props.img;
+    const toggleFollowModal = props.toggleFollowModal ? props.toggleFollowModal : props.props.toggleFollowModal
 
     const closeModal = (e) => {
-        const cn = e.target.className
-        if (cn.includes('Close-button') || cn.includes('View-post-container')){
-            document.body.style.overflow = "scroll"
-            props.setActivePost({ hasPost: false})
-            window.history.pushState("", "", props.props.props.history.location.pathname);
-        } 
+        const validClassArr = ['Close-button', 'View-post-container'];
+        function checkClass() { 
+            for(let i=0; i < validClassArr.length; i++){
+                if (e.target.className.includes(validClassArr[i])) return true
+            }
+            return false
+         }
+        
+        if (checkClass()){
+            props.setModalClass({open: false})
+            setTimeout(() => {
+                props.setActivePost({ hasPost: false})
+                window.history.pushState("", "", props.props.props.history.location.pathname);
+                props.controlScroll()
+            })
+        }
     }
 
+
     return (
-        <div className='View-post-container' onClick={(e) => closeModal(e)}>
-            <div className='Close-button' onClick={(e) => closeModal(e)}>×</div>
+        <div 
+            className={`View-post-container ${props.directViewClass ? props.directViewClass : '' }`} 
+            onClick={ props.post ? (e) => closeModal(e) : () => { return null }} >
+            {
+                props.post && <div className='Close-button' onClick={(e) => closeModal(e)}>×</div>
+            } 
             <div 
                 className='View-post-modal' 
-                style={  window.innerWidth > 945 ? {height: props.imageDimentions.height+'px' } : {height: '59vw', width: '89vw' }}>
-                <div 
+                style={{ height: props.img.height + 'px' }}>
+                <div
                     className='View-post-left-section'
-                    style={ window.innerWidth > 945 ? {
-                        backgroundImage: `url(${postData.imageLink})`,
-                        width: props.imageDimentions.width
-                        } : {
-                        backgroundImage: `url(${postData.imageLink})`,
-                        width: '52vw'
-                        }}
-                    >
+                    style={{
+                        backgroundImage: `url(${props.post ? postData.image_link : postData.src})`,
+                        width: props.img.width
+                    }}>
                 </div>
                 <div 
                     className='View-post-right-section'
@@ -40,10 +52,13 @@ export default function ViewPostModal(props) {
                              <p className='View-post-username'>
                                 <Link to={`/${userData.username}`}> {userData.username} </Link> 
                                 {userData.verified && <span className='Verified'></span>} • 
-                                <span onClick={ () => props.props.toggleFollowModal('follow')}> Follow</span>
+                                <span onClick={ () => toggleFollowModal('follow')}> Follow</span>
                             </p>
                         </div>
-                        <div className='View-post-menu'>...</div>
+                        <div 
+                            className='View-post-menu'
+                            onClick={ () => props.toggleMenuModal()} >...
+                        </div>
                     </div>
                     <div className='Comment-section'>
                         {
@@ -63,7 +78,7 @@ export default function ViewPostModal(props) {
                             <div className='Comment Action'></div>
                             <div className='Share Action'></div>
                         </div>
-                        <p className='Likes-stat'>{postData.totalLikes} Likes</p>
+                        <p className='Likes-stat'>{postData.total_likes} Likes</p>
                         <p className='Post-date'></p>
                     </div>
                     <div className='Comment-input-field-parent'>

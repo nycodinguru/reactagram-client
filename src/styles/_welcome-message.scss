@@ -1,0 +1,124 @@
+.Welcome-message-container {
+    padding: 30px;
+    bottom: 0;
+    position: fixed;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.81);
+    font-weight: 600;
+    width: 100vw;
+    z-index: 1000;
+    line-height: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: left;
+    backdrop-filter: blur(8px);
+    animation: pop-in 0.3s ease-out 1.1s 1 backwards;
+    
+
+    @include mobile {
+        animation: pop-in 0.3s ease-out 1.6s 1 backwards;
+        height: 100vh;
+        top: 0;
+        text-align: center;
+        font-weight: 600;
+        flex-direction: column;
+        padding: 0 30px 100px;
+    }
+
+    &.backdrop {
+        z-index: 100;
+        color: transparent;
+        backdrop-filter: blur(8px);
+        width: 99vw;
+        background-image: none;
+        background-color: transparent !important;
+        margin: 0 auto;
+    }
+
+    .Close-button {
+        z-index: 10500;
+        background: 0 0;
+        border: 0;
+        height: 36px;
+        outline: 0;
+        overflow: hidden;
+        position: absolute;
+        right: 0;
+        top: 7px;
+        width: 36px;
+        color: $offWhite;
+        display: block;
+        font-size: 1.6rem;
+        opacity: 0.6;
+        line-height: 2.1rem;
+        font-weight: 600;
+        padding: 0;
+        margin: 0;
+        cursor: default;
+
+        @include mobile {
+            font-size: 1.9rem;
+            right: 7px;
+        }
+
+    }
+
+    .Logo {
+        background-image: url('../assets/images/pngs/reactagramlogo.png');
+        filter: invert(1);
+        width: 300px;
+        height: 116px;
+        background-size: 100px;
+        background-repeat: no-repeat;
+        filter: invert(1);
+        background-position: 80% 50%;
+
+        @include mobile {
+            width: 100%;
+            background-size: 80px;
+            background-position: 50% 50%;
+        }
+    }
+
+    .Message-parent {
+        margin: 5px 0 0 -20px;
+        max-width: 550px;
+        padding: 0 20px;
+
+        @include mobile {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        h4 {
+            font-size: 0.92rem;
+            margin-bottom: 5px;
+        }
+    
+        p {
+            margin: 5px 0 0 0;
+            max-width: 938px;
+            font-size: 0.85rem;
+            line-height: 20px;
+
+            @include mobile {
+                margin: 15px 0 0 0;
+                line-height: 21px;
+            }
+        }
+    }
+
+    #Button {
+        width: max-content;
+        margin: auto 40px;
+        font-size: 0.9rem;
+        padding: 15px;
+
+        @include mobile {
+            margin: 80px auto 0 !important;
+        }
+    }
+
+}
+

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { Helmet } from "react-helmet";
 import { isMobileOnly } from "react-device-detect";
 
@@ -8,54 +8,98 @@ import Loading from '../../Shared/Loading';
 import NoMatch from '../../NoMatch';
 import LoginModal from '../../LoginModal';
 import MenuModal from '../../Shared/MenuModal';
-import Modal from './Modal';
+import PostModal from '../PostModal';
 import MobileView from './MobileView';
 
-export default function ViewPost(props) {
-    const [userProfile, setUserProfile] = useState({ user: {} });
-    const [userPost, setUserPost] = useState({ data: [] });
-    const [loadingState, setLoadingState] = useState({ isLoading: true });
-    const [modalClass, setModalClass] = useState({ open: false });
-    const [loginModal, setLoginModal] = useState({ 
+const reducer = (state, action) => {
+    switch (action.type) {
+        case 'loading': 
+            return { 
+                ...state, 
+                loading: action.value
+            };
+        case 'post_payload':
+            return {
+                ...state,
+                  userPost: action.post
+                };
+        case 'profile_payload':
+            return {
+                ...state,
+                userProfile: action.profile
+                };
+        case 'modal_class':
+            return { 
+                ...state, 
+                modalClass: action.value
+            };
+        case 'login_modal':
+            return { 
+                ...state,
+                loginModal: {
+                    open: action.value,
+                    trigger: action.trigger
+                }
+            };
+        case 'menu_modal':
+            return {
+                ...state,
+                menuModal: action.value
+            };
+        default:
+            break;
+    }
+    return state;
+};
+
+const initialState = {
+    userProfile: {},
+    userPost: [],
+    loading: true,
+    modalClass: false,
+    loginModal: {
         open: false,
-        trigger: ''  });
-    const [menuModal, setMenuModal] = useState({ open: false });
+        trigger: ''  },
+    menuModal: false
+};
+
+export default function ViewPost(props) {
+    const [state, dispatch] = useReducer(reducer, initialState);
+    const { userProfile, userPost, loading, modalClass, loginModal, menuModal } = state;
 
     const toggleMenuModal = () => {
-        setMenuModal({open: true})
+        let boolVal = state.menuModal ? false : true;
+        dispatch({ type: 'menu_modal', value: boolVal })
         setTimeout(() => {
-            setModalClass({open: true})
+            dispatch({ type: 'modal_class', value: boolVal })
         }, 300)
-        document.body.style.overflow = "hidden";
     }
 
     const toggleFollowModal = (src) => {
-        setLoginModal({open: true, trigger: src})
+        //setLoginModal({open: true, trigger: src})
         setTimeout(() => {
-            setModalClass({open: true})
+            //setModalClass({open: true})
         }, 300)
-        document.body.style.overflow = "hidden";
-    }
+            }
 
     const closeModal = (e) => {
         const validClassArr = ['Menu-modal-container', 'Cancel', 'Not-now-button', 'Close-toggle', 'Login-modal-container'];
         
-        function checkClass(cn) {
-            return cn === e.target.className;
-        }
+        function checkClass(cn) { return cn === e.target.className }
 
         if (e.target.className.includes(validClassArr.filter(checkClass))){
-            setModalClass({open: false})
+            dispatch({ type: 'modal_class', modalClass: false })
             setTimeout(() => {
-                document.body.style.overflow = "scroll"
-                setMenuModal({open: false})
-                setLoginModal({open: false, trigger: ''})}, 300)
+                dispatch({ type: 'menu_modal', menuModal: false })
+                //setLoginModal({open: false, trigger: ''})
+            }, 300)   
         }
     }
 
     const getImageDimentions = (info) => {
         let img = new Image();
-        img.src = info.post.image_link;
+        img.src = info.image_link;
+        img.caption = info.caption;
 
         if (img.src){
             if ( isMobileOnly ) return viewMobile(img);
@@ -66,11 +110,11 @@ export default function ViewPost(props) {
     useEffect(() => {
         async function userSearch() {
             let post = await getSinglePost(props.match.params.user, props.match.params.postId);
-            if (post) {
-                setUserPost({ data: post })
-            }
-            if (post === null) { setUserProfile({ ...userProfile, user: null }) }
-            const checkForPosts = setTimeout(() => { if (post) setLoadingState({ isLoading: false }) }, 1500)
+            if (post) { 
+                     dispatch({ type: 'post_payload', post: post }) 
+                     dispatch({ type: 'loading', loading: false }) 
+                }
+            if (post === null) { dispatch({ type: 'post_payload', post: null }) }
         }
         userSearch()
         return () => {
@@ -82,11 +126,11 @@ export default function ViewPost(props) {
     }
 
     const viewMobile = (img) => {
-
+        window.scrollTo(0, 0)
         return (
             <MobileView 
                 img={img}
-                userPost={userPost}
+                userPost={state.userPost}
                 toggleFollowModal={toggleFollowModal}
                 toggleMenuModal={toggleMenuModal}
                 routeTo={routeTo}
@@ -95,31 +139,32 @@ export default function ViewPost(props) {
     }
 
     const viewPostModal = (img) => {
+        window.scrollTo(0, 0)
         return (
-            <Modal 
+            <PostModal 
                 img={img}
-                userPost={userPost}
+                userPost={state.userPost}
                 toggleFollowModal={toggleFollowModal}
                 toggleMenuModal={toggleMenuModal}
                 routeTo={routeTo}
+                directViewClass={'Direct-view'}
             />
         )
     }
 
-    return (
-        
+    return (        
         <React.Fragment>
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>{props.match.params.user} • Reactagram photos</title>
             </Helmet>
             {
-                loadingState.isLoading ?
-                    <Loading styleProps={{ height: 'calc(100vh - 97px)', width: '100vw', padding: '130px 0 0 0' }} /> : userPost.data.post ?
-                        getImageDimentions(userPost.data) : <NoMatch />
+                state.loading ?
+                    <Loading styleProps={{ height: 'calc(100vh - 97px)', width: '100vw', padding: '130px 0 0 0' }} /> : state.userPost.user && state.userPost.post ?
+                        getImageDimentions(state.userPost.post) : <NoMatch />
             }
-            {
-                loginModal.open &&
+            {/* {
+                state.loginModal.open &&
                     <LoginModal
                         props={props}
                         imgurl={userPost.data.user.profile_image_link}
@@ -128,15 +173,14 @@ export default function ViewPost(props) {
                         closeModal={closeModal}
                         modalClass={modalClass}
                     />
-            } 
+            }  */}
             {
-                menuModal.open &&
+                state.menuModal &&
                     <MenuModal
                         props={props}
-                        menuModal={menuModal}
-                        setMenuModal={setMenuModal}
-                        closeModal={closeModal}
-                        modalClass={modalClass}
+                        menuModal={state.menuModal}
+                        modalClass={state.modalClass}
+                        toggleMenuModal={toggleMenuModal}
                     />
             }     
         </React.Fragment>

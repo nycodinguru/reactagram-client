@@ -9,6 +9,7 @@ import LoginModal from '../LoginModal';
 import Loading from '../Shared/Loading';
 
 export default function Profile(props) {
+    const _postLightbox = React.createRef();
     const [userProfile, setUserProfile] = useState({ user: null });
     const [userPosts, setUserPosts] = useState({ posts: [] });
     const [activeSection, setActiveSection] = useState({
@@ -26,7 +27,7 @@ export default function Profile(props) {
     });
     const [modalClass, setModalClass] = useState({ open: false });
 
-    function setActive(e){
+    function setActiveCategory(e){
         if (e.target.getAttribute('category') === 'posts'){
             setActiveSection({
                 posts: true,
@@ -82,9 +83,7 @@ export default function Profile(props) {
         setLoginModal({open: true, trigger: src})
         setTimeout(() => {
             setModalClass({open: true})
-        }, 300)
-       
-        document.body.style.overflow = "hidden";
+            controlOverflow()}, 300)
     }
 
     const closeModal = (e) => {
@@ -93,10 +92,16 @@ export default function Profile(props) {
         if (cn.includes('Login-modal-container') || cn === 'Not-now-button' || cn === 'Close-toggle'){
             setModalClass({open: false})
             setTimeout(() => {
-                document.body.style.overflow = "scroll"
-                setLoginModal({open: false, trigger: ''})}, 300)
+                setLoginModal({open: false, trigger: ''})
+                controlOverflow()}, 300)
         }
     }
+
+    const controlOverflow = () => {
+        let overflowVal = !loginModal.open || document.querySelector('.View-post-container') ? "hidden" : "scroll";
+        document.body.style.overflow = overflowVal
+    }
+
 
     const profileTemplate = () => {
         const data = userProfile.user.user;
@@ -141,11 +146,12 @@ export default function Profile(props) {
                 </div>
                 <div className='Profile-posts-container'>
             <div className='Profile-posts-sort-menu'>
-                <div className={`posts option ${activeSection.posts ? 'Active' : ''}`} category='posts' onClick={(e) => setActive(e)}></div>
+                <div className={`posts option ${activeSection.posts ? 'Active' : ''}`} category='posts' onClick={(e) => setActiveCategory(e)}></div>
                 <div className={`feed option ${activeSection.feed ? 'Active' : ''}`} category='feed' onClick={ () => toggleFollowModal('feed')}></div>
                 <div className={`tagged option ${activeSection.tagged ? 'Active' : ''}`} category='tagged' onClick={ () => toggleFollowModal('tagged')}></div>
             </div>
                 { activeSection.posts && <ProfilePosts 
+                                            _postLightbox={_postLightbox}
                                             props={props}
                                             toggleFollowModal={toggleFollowModal}
                                             userPosts={userPosts.posts}
@@ -166,7 +172,8 @@ export default function Profile(props) {
         </Helmet>
         { 
             loadingState.isLoading ? userProfile.user ?
-                profileTemplate() : noMatchFound() : <Loading styleProps={{height: '100vh', width: '100vw'}}/> }
+                profileTemplate() : noMatchFound() : <Loading styleProps={{height: '100vh', width: '100vw'}}/> 
+        }
         {
             loginModal.open &&
                 <LoginModal
@@ -182,43 +189,3 @@ export default function Profile(props) {
     )
     
 }
-
-
- {/* <div className='Profile-memories-section'>
-                <div className='Profile-memory'>
-                    <div className='Profile-memory-img-outer'>
-                        <div className='Profile-memory-img-inner'></div>   
-                    </div>
-                    <p className='Profile-memory-title'>Code ...</p>
-                </div>
-                <div className='Profile-memory'>
-                    <div className='Profile-memory-img-outer'>
-                        <div className='Profile-memory-img-inner'></div>   
-                    </div>
-                    <p className='Profile-memory-title'>Tuesday</p>
-                </div>
-                <div className='Profile-memory'>
-                    <div className='Profile-memory-img-outer'>
-                        <div className='Profile-memory-img-inner'></div>   
-                    </div>
-                    <p className='Profile-memory-title'>Mar 2019</p>
-                </div>
-                <div className='Profile-memory'>
-                    <div className='Profile-memory-img-outer'>
-                        <div className='Profile-memory-img-inner'></div>   
-                    </div>
-                    <p className='Profile-memory-title'>Memory</p>
-                </div>
-                <div className='Profile-memory'>
-                    <div className='Profile-memory-img-outer'>
-                        <div className='Profile-memory-img-inner'></div>   
-                    </div>
-                    <p className='Profile-memory-title'>Tuesday</p>
-                </div>
-                <div className='Profile-memory'>
-                    <div className='Profile-memory-img-outer'>
-                        <div className='Profile-memory-img-inner'></div>   
-                    </div>
-                    <p className='Profile-memory-title'>Mar 2019</p>
-                </div>
-            </div> */}
